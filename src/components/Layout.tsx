@@ -31,46 +31,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Company Logos Header */}
-      <div className="bg-white border-b border-gray-200 px-4 py-3">
-        <div className="flex items-center justify-center space-x-8 max-w-7xl mx-auto">
-          <div className="flex items-center space-x-2">
-            <img 
-              src="/INTEGRATED-removebg-preview.png" 
-              alt="Integrated Exploratory Mines" 
-              className="h-12 w-auto object-contain"
-            />
-          </div>
-          <div className="flex items-center space-x-2">
-            <img 
-              src="/ocpp.png" 
-              alt="OCP Mining" 
-              className="h-12 w-auto object-contain"
-            />
-          </div>
-          <div className="flex items-center space-x-2">
-            <img 
-              src="/Future-removebg-preview.png" 
-              alt="Future is Mine" 
-              className="h-12 w-auto object-contain"
-            />
-          </div>
-        </div>
-      </div>
-
       {/* Mobile menu button */}
       <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Bot className="h-8 w-8 text-emerald-600" />
-            <span className="text-xl font-bold text-gray-900">AI Platform</span>
-          </div>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
           >
             {sidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
+          <div className="flex items-center space-x-2">
+            <Bot className="h-8 w-8 text-emerald-600" />
+            <span className="text-xl font-bold text-gray-900">AI Platform</span>
+          </div>
         </div>
       </div>
 
@@ -87,23 +60,45 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Sidebar */}
       <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:static lg:inset-0`}>
-        <div className="flex h-16 items-center justify-center border-b border-gray-200 lg:hidden">
+      } lg:static lg:inset-0 flex flex-col`}>
+        
+        {/* Sidebar Header with AI Platform */}
+        <div className="flex h-16 items-center justify-center border-b border-gray-200">
           <div className="flex items-center space-x-2">
             <Bot className="h-8 w-8 text-emerald-600" />
             <span className="text-xl font-bold text-gray-900">AI Platform</span>
           </div>
         </div>
-        
-        {/* Desktop header */}
-        <div className="hidden lg:flex h-16 items-center justify-center border-b border-gray-200">
-          <div className="flex items-center space-x-2">
-            <Bot className="h-8 w-8 text-emerald-600" />
-            <span className="text-xl font-bold text-gray-900">AI Platform</span>
+
+        {/* Company Logos Section */}
+        <div className="border-b border-gray-200 py-4 px-4">
+          <div className="space-y-3">
+            <div className="flex justify-center">
+              <img 
+                src="/INTEGRATED-removebg-preview.png" 
+                alt="Integrated Exploratory Mines" 
+                className="h-10 w-auto object-contain"
+              />
+            </div>
+            <div className="flex justify-center">
+              <img 
+                src="/ocpp.png" 
+                alt="OCP Mining" 
+                className="h-10 w-auto object-contain"
+              />
+            </div>
+            <div className="flex justify-center">
+              <img 
+                src="/Future-removebg-preview.png" 
+                alt="Future is Mine" 
+                className="h-10 w-auto object-contain"
+              />
+            </div>
           </div>
         </div>
         
-        <nav className="mt-8 px-4 pb-4 overflow-y-auto h-full">
+        {/* Navigation */}
+        <nav className="flex-1 mt-6 px-4 pb-4 overflow-y-auto">
           <ul className="space-y-2">
             {navigation.map((item) => {
               const isActive = location.pathname === item.href;
