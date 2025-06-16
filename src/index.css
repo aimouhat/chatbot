@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply text-gray-900 bg-gray-50;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500;
+  }
+
+  /* Mobile-first responsive grid */
+  .responsive-grid {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+
+  .responsive-stats-grid {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  /* Mobile-friendly tables */
+  .mobile-table {
+    @apply block sm:table;
+  }
+
+  .mobile-table thead {
+    @apply hidden sm:table-header-group;
+  }
+
+  .mobile-table tbody {
+    @apply block sm:table-row-group;
+  }
+
+  .mobile-table tr {
+    @apply block border border-gray-200 rounded-lg mb-4 p-4 sm:table-row sm:border-0 sm:rounded-none sm:mb-0 sm:p-0;
+  }
+
+  .mobile-table td {
+    @apply block text-right pl-0 pr-0 py-2 border-0 sm:table-cell sm:text-left sm:px-6 sm:py-4 sm:border-t sm:border-gray-200;
+  }
+
+  .mobile-table td:before {
+    content: attr(data-label) ": ";
+    @apply font-medium text-gray-900 sm:hidden;
+    float: left;
+  }
+
+  /* Mobile-friendly modals */
+  .mobile-modal {
+    @apply w-full max-w-sm mx-4 sm:max-w-md sm:mx-auto;
+  }
+
+  /* Responsive text sizes */
+  .responsive-title {
+    @apply text-2xl sm:text-3xl font-bold text-gray-900;
+  }
+
+  .responsive-subtitle {
+    @apply text-base sm:text-lg text-gray-600;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Loading animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Status indicators */
+.status-active {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-inactive {
+  @apply bg-gray-100 text-gray-800;
+}
+
+.status-training {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.status-error {
+  @apply bg-red-100 text-red-800;
+}
+
+/* Mobile touch targets */
+@media (max-width: 768px) {
+  button, .btn-primary, .btn-secondary {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  input, select, textarea {
+    @apply min-h-[44px];
+  }
+}
+
+/* Responsive spacing */
+.responsive-spacing {
+  @apply space-y-4 sm:space-y-6 lg:space-y-8;
+}
+
+.responsive-padding {
+  @apply p-4 sm:p-6 lg:p-8;
+}
+
+/* Mobile-friendly code blocks */
+.code-block {
+  @apply text-xs sm:text-sm overflow-x-auto;
+}
+
+/* Responsive flex layouts */
+.responsive-flex {
+  @apply flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4;
+}
+
+/* Mobile-first navigation */
+.mobile-nav {
+  @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-2 sm:hidden;
+}
+
+/* Responsive images */
+.responsive-logo {
+  @apply h-8 w-auto sm:h-10 lg:h-12 object-contain;
+}
+
+/* Mobile-friendly forms */
+.mobile-form {
+  @apply space-y-4;
+}
+
+.mobile-form .form-group {
+  @apply space-y-2;
+}
+
+.mobile-form label {
+  @apply block text-sm font-medium text-gray-700;
+}
+
+.mobile-form input,
+.mobile-form select,
+.mobile-form textarea {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-base;
+}
+
+/* Responsive cards */
+.responsive-card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 lg:rounded-xl;
+}
+
+/* Mobile-friendly buttons */
+.mobile-button-group {
+  @apply flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2;
+}
+
+.mobile-button-group button {
+  @apply w-full sm:w-auto;
+}
+
+/* Responsive typography */
+.responsive-text {
+  @apply text-sm sm:text-base;
+}
+
+.responsive-heading {
+  @apply text-lg sm:text-xl lg:text-2xl font-semibold;
+}
+
+/* Mobile-friendly stats */
+.mobile-stat {
+  @apply text-center sm:text-left;
+}
+
+.mobile-stat-value {
+  @apply text-2xl sm:text-3xl font-bold;
+}
+
+.mobile-stat-label {
+  @apply text-sm text-gray-600;
+}
