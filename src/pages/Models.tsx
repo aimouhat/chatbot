@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Brain, Plus, Play, Pause, Trash2, Settings, Download, Code, FileText, ArrowLeft } from 'lucide-react';
+import { Brain, Plus, Play, Pause, Trash2, Settings, Download, Code, FileText } from 'lucide-react';
 import ApiCodeGenerator from '../components/ApiCodeGenerator';
 import ModelDocuments from '../components/ModelDocuments';
 
@@ -73,21 +73,19 @@ const Models = () => {
 
   if (selectedModel && selectedModelData) {
     return (
-      <div className="responsive-spacing">
+      <div className="space-y-8">
         {/* Header */}
-        <div className="responsive-flex justify-between">
-          <div className="responsive-flex">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
             <button
               onClick={() => setSelectedModel(null)}
-              className="flex items-center text-gray-600 hover:text-gray-900 mb-2 sm:mb-0"
+              className="text-gray-600 hover:text-gray-900"
             >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              <span className="hidden sm:inline">Back to Models</span>
-              <span className="sm:hidden">Back</span>
+              ← Back to Models
             </button>
             <div>
-              <h1 className="responsive-title">{selectedModelData.name}</h1>
-              <p className="mt-2 responsive-subtitle">
+              <h1 className="text-3xl font-bold text-gray-900">{selectedModelData.name}</h1>
+              <p className="mt-2 text-gray-600">
                 Manage model configuration, documents, and API integration
               </p>
             </div>
@@ -98,8 +96,8 @@ const Models = () => {
         </div>
 
         {/* Tabs */}
-        <div className="border-b border-gray-200 overflow-x-auto">
-          <nav className="-mb-px flex space-x-4 sm:space-x-8 min-w-max">
+        <div className="border-b border-gray-200">
+          <nav className="-mb-px flex space-x-8">
             {[
               { id: 'overview', name: 'Overview', icon: Brain },
               { id: 'documents', name: 'Documents', icon: FileText },
@@ -108,7 +106,7 @@ const Models = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${
+                className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === tab.id
                     ? 'border-emerald-500 text-emerald-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -124,27 +122,27 @@ const Models = () => {
         {/* Tab Content */}
         <div>
           {activeTab === 'overview' && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Model Stats */}
-              <div className="responsive-card">
-                <h3 className="responsive-heading text-gray-900 mb-4">Model Statistics</h3>
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Model Statistics</h3>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="responsive-text text-gray-600">Accuracy</span>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-600">Accuracy</span>
                     <span className="text-sm font-medium text-gray-900">
                       {selectedModelData.accuracy > 0 ? `${selectedModelData.accuracy}%` : 'N/A'}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="responsive-text text-gray-600">Training Documents</span>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-600">Training Documents</span>
                     <span className="text-sm font-medium text-gray-900">{selectedModelData.documents}</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="responsive-text text-gray-600">API Calls</span>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-600">API Calls</span>
                     <span className="text-sm font-medium text-gray-900">{selectedModelData.apiCalls.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="responsive-text text-gray-600">Last Trained</span>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-gray-600">Last Trained</span>
                     <span className="text-sm font-medium text-gray-900">
                       {selectedModelData.lastTrained || 'Never'}
                     </span>
@@ -153,25 +151,25 @@ const Models = () => {
               </div>
 
               {/* Model Actions */}
-              <div className="responsive-card">
-                <h3 className="responsive-heading text-gray-900 mb-4">Model Actions</h3>
-                <div className="mobile-button-group">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Model Actions</h3>
+                <div className="space-y-3">
                   {selectedModelData.status === 'active' ? (
-                    <button className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors flex items-center justify-center">
+                    <button className="w-full flex items-center justify-center px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors">
                       <Pause className="h-4 w-4 mr-2" />
                       Pause Model
                     </button>
                   ) : (
-                    <button className="btn-primary flex items-center justify-center">
+                    <button className="w-full flex items-center justify-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                       <Play className="h-4 w-4 mr-2" />
                       {selectedModelData.status === 'training' ? 'Training...' : 'Activate Model'}
                     </button>
                   )}
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center">
+                  <button className="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                     <Settings className="h-4 w-4 mr-2" />
                     Configure Model
                   </button>
-                  <button className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-center">
+                  <button className="w-full flex items-center justify-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
                     <Download className="h-4 w-4 mr-2" />
                     Export Model
                   </button>
@@ -199,44 +197,51 @@ const Models = () => {
   }
 
   return (
-    <div className="responsive-spacing">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="responsive-flex justify-between">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="responsive-title">Models</h1>
-          <p className="mt-2 responsive-subtitle">
+          <h1 className="text-3xl font-bold text-gray-900">Models</h1>
+          <p className="mt-2 text-gray-600">
             Manage and monitor your AI models
           </p>
         </div>
         <button
           onClick={() => setShowCreateModal(true)}
-          className="btn-primary flex items-center"
+          className="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
         >
           <Plus className="h-4 w-4 mr-2" />
-          <span className="hidden sm:inline">Create Model</span>
-          <span className="sm:hidden">Create</span>
+          Create Model
         </button>
       </div>
 
       {/* Models Grid */}
-      <div className="responsive-grid">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {models.map((model) => (
-          <div key={model.id} className="responsive-card">
+          <div key={model.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-3 min-w-0 flex-1">
-                <div className="p-2 bg-emerald-100 rounded-lg flex-shrink-0">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-emerald-100 rounded-lg">
                   <Brain className="h-5 w-5 text-emerald-600" />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-semibold text-gray-900 truncate">{model.name}</h3>
+                <div>
+                  <h3 className="font-semibold text-gray-900">{model.name}</h3>
                   <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(model.status)}`}>
                     {model.status}
                   </span>
                 </div>
               </div>
-              <button className="text-gray-400 hover:text-red-600 flex-shrink-0 ml-2">
-                <Trash2 className="h-4 w-4" />
-              </button>
+              <div className="flex items-center space-x-1">
+                <button 
+                  onClick={() => setSelectedModel(model.id)}
+                  className="p-1 text-gray-400 hover:text-gray-600"
+                >
+                  <Settings className="h-4 w-4" />
+                </button>
+                <button className="p-1 text-gray-400 hover:text-red-600">
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
             </div>
 
             <div className="space-y-3">
@@ -262,15 +267,15 @@ const Models = () => {
               </div>
             </div>
 
-            <div className="mt-6 mobile-button-group">
+            <div className="mt-6 flex space-x-2">
               <button 
                 onClick={() => setSelectedModel(model.id)}
-                className="btn-primary flex items-center justify-center"
+                className="flex-1 flex items-center justify-center px-3 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
               >
                 <Settings className="h-4 w-4 mr-1" />
                 Manage
               </button>
-              <button className="btn-secondary flex items-center justify-center">
+              <button className="flex items-center justify-center px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
                 <Code className="h-4 w-4" />
               </button>
             </div>
@@ -280,16 +285,19 @@ const Models = () => {
 
       {/* Create Model Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="mobile-modal responsive-card">
-            <h2 className="responsive-heading text-gray-900 mb-4">Create New Model</h2>
-            <div className="mobile-form">
-              <div className="form-group">
-                <label>Model Name</label>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 w-full max-w-md">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Create New Model</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Model Name
+                </label>
                 <input
                   type="text"
                   value={newModelName}
                   onChange={(e) => setNewModelName(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="Enter model name..."
                 />
               </div>
@@ -300,16 +308,16 @@ const Models = () => {
                 </p>
               </div>
             </div>
-            <div className="mt-6 mobile-button-group">
+            <div className="mt-6 flex space-x-3">
               <button
                 onClick={() => setShowCreateModal(false)}
-                className="btn-secondary"
+                className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleCreateModel}
-                className="btn-primary"
+                className="flex-1 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
               >
                 Create
               </button>
